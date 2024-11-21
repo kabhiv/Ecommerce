@@ -18,14 +18,15 @@ public class ProductController {
      public ProductController(ProductService productService){
          this.productService = productService;
      }
+
+     // https://localhost:8080/products/10
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable("id") long id){
-        return productService.getSingleProduct(id);
+         return productService.getSingleProduct(id);
     }
-
 
     @GetMapping()
     public List<Product> getAllProducts(){
-        return productService.getAllProduct();
+         return productService.getAllProduct();
     }
 }

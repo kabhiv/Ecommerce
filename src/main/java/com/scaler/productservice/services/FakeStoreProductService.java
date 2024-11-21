@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class FakeStoreProductService implements ProductService {
 
-
     private RestTemplate restTemplate;
 
     public FakeStoreProductService(RestTemplate restTemplate) {
@@ -19,24 +18,27 @@ public class FakeStoreProductService implements ProductService {
     }
     @Override
     public Product getSingleProduct(Long productId) {
+
+//        List<Integer> list = new ArrayList<>();
+//        List<String> list1 = new ArrayList<>();
+//
+//        List list2 = new ArrayList();
+//
+////        list2.add(1,"Abhi", );
+////        list.add();
+//
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/"+productId, FakeStoreProductDto.class);
-
         return convertFakeStoreProductToProduct(fakeStoreProductDto);
     }
 
+
     @Override
     public List<Product> getAllProduct() {
-        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject(
-                "https://fakestoreapi.com/products",FakeStoreProductDto[].class);
 
-        // covert list of fakestore into list of products
-
-        List<Product> products = new ArrayList<>();
-        for(FakeStoreProductDto fakeStoreProductDto: fakeStoreProductDtos){
-            products.add(convertFakeStoreProductToProduct(fakeStoreProductDto));
-        }
-        return products;
+//        List<FakeStoreProductDto> fakeStoreProductDto = restTemplate.getForObject(
+//                "https://fakestoreapi.com/products",List<FakeStoreProductDto>.class);
+        return null;
     }
 
     private Product convertFakeStoreProductToProduct(FakeStoreProductDto fakeStoreProductDto){

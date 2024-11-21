@@ -13,7 +13,7 @@ public class SampleController {
                            @PathVariable("times") Integer times){
         String output="";
         for(int i=0;i<times;i++){
-            output += name + " is a gaandu ";
+            output += name;
         }
         return output;
     }
