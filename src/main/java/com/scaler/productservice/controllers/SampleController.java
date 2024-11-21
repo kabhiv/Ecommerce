@@ -24,4 +24,3 @@ public class SampleController {
     }
 }
 
-// https:localhost:8080
