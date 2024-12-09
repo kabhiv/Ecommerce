@@ -1,5 +1,6 @@
 package com.scaler.productservice.controllers;
 
+import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Product;
 import com.scaler.productservice.services.FakeStoreProductService;
 import com.scaler.productservice.services.ProductService;
@@ -20,7 +21,7 @@ public class ProductController {
 
      // https://localhost:8080/products/10
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") long id){
+    public ResponseEntity<Product> getProductById(@PathVariable("id") long id) throws ProductNotFoundException {
          ResponseEntity<Product> responseEntity = new ResponseEntity<>(
                  productService.getSingleProduct(id),
                  HttpStatus.OK
