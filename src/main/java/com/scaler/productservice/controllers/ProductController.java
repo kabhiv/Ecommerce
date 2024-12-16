@@ -4,6 +4,7 @@ import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Product;
 import com.scaler.productservice.services.FakeStoreProductService;
 import com.scaler.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ProductController {
 
      private ProductService productService;
-     public ProductController(ProductService productService){
+     public ProductController(@Qualifier("selfProductService") ProductService productService){
          this.productService = productService;
      }
 
@@ -45,5 +46,17 @@ public class ProductController {
     @PutMapping("/{id}")
     public Product replaceProduct(@PathVariable("id") long id,@RequestBody Product product){
          return null;
+    }
+
+
+    @PostMapping
+    public Product addNewProduct(@RequestBody Product product){
+
+         return productService.addNewProduct(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long productId){
+         productService.deleteProduct(productId);
     }
 }
