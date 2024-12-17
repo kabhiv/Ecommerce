@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service("selfProductService")
 public class SelfProductService implements ProductService {
 
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     public SelfProductService(ProductRepository productRepository,CategoryRepository categoryRepository){
         this.productRepository=productRepository;
@@ -32,7 +32,7 @@ public class SelfProductService implements ProductService {
         Optional<Product> productOptional = productRepository.findById(productId);
 
         if(productOptional.isEmpty()){
-            throw new ProductNotFoundException("Product not found");
+            throw new ProductNotFoundException("Product not found 1");
         }
         return productOptional.get();
     }
@@ -80,11 +80,11 @@ public class SelfProductService implements ProductService {
     @Override
     public Product addNewProduct(Product product) {
         Category category = product.getCategory();
-
-        if(category.getId()== null){
-            category= categoryRepository.save(category);
-            product.setCategory(category);
-        }
+//
+//        if(category.getId()== null){
+//            category= categoryRepository.save(category);
+//            product.setCategory(category);
+//        }
 
        return productRepository.save(product);
     }
