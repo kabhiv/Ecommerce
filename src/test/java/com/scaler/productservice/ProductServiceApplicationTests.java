@@ -36,7 +36,7 @@ class ProductServiceApplicationTests {
 
 		Optional<Category> optionalCategory	= categoryRepository.findById(1L);
 
-		List<Product> products = optionalCategory.get().getProducts();
+//		List<Product> products = optionalCategory.get().getProducts();
 
 		System.out.println("DEBUG");
 	}

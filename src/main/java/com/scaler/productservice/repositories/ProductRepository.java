@@ -3,6 +3,8 @@ package com.scaler.productservice.repositories;
 import com.scaler.productservice.models.Product;
 import com.scaler.productservice.projections.ProductWithIdAndTitle;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findById(Long id);
 
     @Override
-    List<Product> findAll();
+    Page<Product>findAll(Pageable pageable);
 
 
 //    HQL

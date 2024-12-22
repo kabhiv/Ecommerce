@@ -1,10 +1,12 @@
 package com.scaler.productservice.controllers;
 
+import com.scaler.productservice.dtos.FakeStoreProductDto;
 import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Product;
 import com.scaler.productservice.services.FakeStoreProductService;
 import com.scaler.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
      private ProductService productService;
-     public ProductController(@Qualifier("selfProductService") ProductService productService){
+     public ProductController(@Qualifier("fakeStoreProductService") ProductService productService){
          this.productService = productService;
      }
 
@@ -32,8 +34,8 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<Product> getAllProducts(){
-         return productService.getAllProduct();
+    public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize) throws ProductNotFoundException {
+         return productService.getAllProduct(pageNumber,pageSize);
     }
 
     public void deleteProduct(long id){

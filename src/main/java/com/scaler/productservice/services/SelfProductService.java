@@ -3,10 +3,11 @@ package com.scaler.productservice.services;
 import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Category;
 import com.scaler.productservice.models.Product;
-//import com.scaler.productservice.repositories.ProductRepository;
 import com.scaler.productservice.repositories.CategoryRepository;
 import com.scaler.productservice.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,10 +38,25 @@ public class SelfProductService implements ProductService {
         return productOptional.get();
     }
 
+//    @Override
+//    public List<Product> getAllProduct(int PageNumber, int PageSize) throws ProductNotFoundException {
+//        return List.of();
+//    }
+
     @Override
-    public List<Product> getAllProduct() {
-        return productRepository.findAll();
+    public Page<Product> getAllProduct(int pageNumber, int pageSize) {
+
+//        Sort sort= Sort.by("price").ascending().and(Sort.by("title").descending());
+        return productRepository
+                .findAll(PageRequest.of(pageNumber, pageSize,Sort.by("price").ascending()));
+
+
     }
+
+//    @Override
+//    public List<Product> getAllProduct() {
+//        return List.of();
+//    }
 
 
     //Patch
